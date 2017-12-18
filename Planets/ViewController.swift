@@ -31,8 +31,8 @@ class ViewController: UIViewController {
         self.sceneView.scene.rootNode.addChildNode(earthNode)
         
         let action = SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 8)
-        
-        earthNode.runAction(action)
+        let forever = SCNAction.repeatForever(action)
+        earthNode.runAction(forever)
         
     }
     override func didReceiveMemoryWarning() {
