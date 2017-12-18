@@ -30,6 +30,10 @@ class ViewController: UIViewController {
         earthNode.position = SCNVector3(0, 0, -1)
         self.sceneView.scene.rootNode.addChildNode(earthNode)
         
+        let action = SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 8)
+        
+        earthNode.runAction(action)
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -39,3 +43,8 @@ class ViewController: UIViewController {
 
 }
 
+extension Int {
+    
+    var degreesToRadians: Double {return Double(self) * .pi/180}
+    
+}
