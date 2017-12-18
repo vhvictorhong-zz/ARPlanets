@@ -28,10 +28,13 @@ class ViewController: UIViewController {
         let sunNode = SCNNode(geometry: SCNSphere(radius: 0.35))
         let earthParent = SCNNode()
         let venusParent = SCNNode()
+        let moonParent = SCNNode()
+        
         sunNode.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "Sun Diffuse")
         sunNode.position = SCNVector3(0, 0, -1)
         earthParent.position = SCNVector3(0, 0, -1)
         venusParent.position = SCNVector3(0, 0, -1)
+        moonParent.position = SCNVector3(1.2, 0, 0)
         self.sceneView.scene.rootNode.addChildNode(sunNode)
         self.sceneView.scene.rootNode.addChildNode(earthParent)
         self.sceneView.scene.rootNode.addChildNode(venusParent)
@@ -39,23 +42,25 @@ class ViewController: UIViewController {
         let earthNode = planet(geometry: SCNSphere(radius: 0.2), diffuse: #imageLiteral(resourceName: "Earth day"), specular: #imageLiteral(resourceName: "Earth Specular"), emission: #imageLiteral(resourceName: "Earth Emission"), normal: #imageLiteral(resourceName: "Earth Normal"), position: SCNVector3(1.2, 0, 0))
         let venusNode = planet(geometry: SCNSphere(radius: 0.1), diffuse: #imageLiteral(resourceName: "Venus Surface"), specular: nil, emission: #imageLiteral(resourceName: "Venus Atmosphere"), normal: nil, position: SCNVector3(0.7, 0, 0))
         let earthMoonNode = planet(geometry: SCNSphere(radius: 0.05), diffuse: #imageLiteral(resourceName: "Moon Diffuse"), specular: nil, emission: nil, normal: nil, position: SCNVector3(0, 0, -0.3))
-        let venusMoonNode = planet(geometry: SCNSphere(radius: 0.05), diffuse: #imageLiteral(resourceName: "Moon Diffuse"), specular: nil, emission: nil, normal: nil, position: SCNVector3(0, 0, -0.3))
         
         let sunRotation = rotation(time: 8)
         let earthParentRotation = rotation(time: 14)
         let venusParentRotation = rotation(time: 10)
         let earthRotation = rotation(time: 8)
         let venusRotation = rotation(time: 8)
+        let moonRotation = rotation(time: 5)
         
         sunNode.runAction(sunRotation)
         earthParent.runAction(earthParentRotation)
         venusParent.runAction(venusParentRotation)
         earthNode.runAction(earthRotation)
         venusNode.runAction(venusRotation)
+        moonParent.runAction(moonRotation)
+        
         earthParent.addChildNode(earthNode)
+        earthParent.addChildNode(moonParent)
         venusParent.addChildNode(venusNode)
         earthNode.addChildNode(earthMoonNode)
-        venusNode.addChildNode(venusMoonNode)
 
     }
     
